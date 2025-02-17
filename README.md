@@ -1,6 +1,6 @@
 # Real Time Cardinality Estimator
 
-This project was created for the [Future of Database Programming Contest](https://databasecontest2024.athenarc.gr/). We achieved first place in the challenge organized by [Athena Research Center](https://www.athenarc.gr/en/home) and the [DareLab group](https://darelab.athenarc.gr/).
+This project was created for the [Future of Database Programming Contest](https://databasecontest2024.athenarc.gr/). We achieved first place 🥇 in the challenge organized by [Athena Research Center](https://www.athenarc.gr/en/home) and the [DareLab group](https://darelab.athenarc.gr/).
 
 ## Competition Overview
 
