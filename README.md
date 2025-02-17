@@ -89,11 +89,9 @@ The estimator is composed of several components:
     The [`MCVTrack`](CardinalityEstimation/include/MCVTrack.hpp) class keeps counts for values that occur frequently. This helps further improve the accuracy of the estimator.
 
 - __Scoring__:  
-    The estimator outputs a score based on the formula:  
-
-    $$
-    \text{score} = \frac{\sum_{i=0}^{n} \left| \log\left(\frac{\text{Estimated\_Value}_i + 1}{\text{Real\_Answer}_i + 1}\right) \right|}{n}
-    $$
+    The estimator outputs a score based on the formula:
+  
+   $$\text{score} = \frac{\sum_{i=0}^{n} \left| \log\left(\frac{\text{EstimatedValue}_i + 1}{\text{RealAnswer}_i + 1}\right) \right|}{n}$$
 
     It also details the memory usage of internal components (e.g., buckets, cache, MCV).
 
