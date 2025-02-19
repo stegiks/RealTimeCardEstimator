@@ -2,6 +2,13 @@
 
 This project was created for the [Future of Database Programming Contest](https://databasecontest2024.athenarc.gr/). We achieved first place 🥇 in the challenge organized by [Athena Research Center](https://www.athenarc.gr/en/home) and the [DareLab group](https://darelab.athenarc.gr/).
 
+## Team Members
+
+- [Stefanos Gkikas](https://github.com/stegiks/)
+- [Theodoris Mallios](https://github.com/TeoMal/)
+- [Ioanna Poulou](https://github.com/ioannapoulou/)
+- [Giorgos Nikolaidis](https://github.com/George-RG/)
+
 ## Competition Overview
 
 In this contest the task was to build a __real-time cardinality estimator__ for a table containing two integer columns. Cardinality estimation is at the heart of query optimization in relational databases. Accurate estimations guide the optimizer to choose a good execution plan; an error in estimation can lead to inefficient query plans.
