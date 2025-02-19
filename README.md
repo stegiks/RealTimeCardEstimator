@@ -17,6 +17,9 @@ Except for the estimation, the estimator had to be efficient in terms of memory 
 - __Data and Operations__: The initial data volume of each test case cannot exceed 50,000,000, including 20,000,000 insert, delete, and query operations. The data value ranges from 1 to 20,000,000.
 - __Memory Usage__: Limit the memory usage to 4MB.
 - __Execution Time__: The estimator must be able to run in under 10s for each test case.
+- __Scoring__: The score is based on error ( the lower the better ). Assuming n is the number of queries, the error calculation formula is as follows:
+
+    $$\text{score} = \frac{\sum_{i=0}^{n} \left| \log\left(\frac{\text{EstimatedValue}_i + 1}{\text{RealAnswer}_i + 1}\right) \right|}{n}$$
 
 More details about the task can be seen on the [contest details page](https://databasecontest2024.athenarc.gr/Task_Details).
 
@@ -88,15 +91,8 @@ The estimator is composed of several components:
 - __MCV (Most Common Value) Tracking__:  
     The [`MCVTrack`](CardinalityEstimation/include/MCVTrack.hpp) class keeps counts for values that occur frequently. This helps further improve the accuracy of the estimator.
 
-- __Scoring__:  
-    The estimator outputs a score based on the formula:
-  
-   $$\text{score} = \frac{\sum_{i=0}^{n} \left| \log\left(\frac{\text{EstimatedValue}_i + 1}{\text{RealAnswer}_i + 1}\right) \right|}{n}$$
-
-    It also details the memory usage of internal components (e.g., buckets, cache, MCV).
-
 - __Third-Party Tools__:  
     Besides the standard library, the project uses:
 
-    - [rapidhash](https://github.com/Nicoshev/rapidhash) for an efficient hash function used in HLL.
-    - [robin hood](https://github.com/martinus/robin-hood-hashing) unordered map for improved performance over STL’s unordered map.
+  - [rapidhash](https://github.com/Nicoshev/rapidhash) for an efficient hash function used in HLL.
+  - [robin hood](https://github.com/martinus/robin-hood-hashing) unordered map for improved performance over STL’s unordered map.
