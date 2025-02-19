@@ -41,7 +41,7 @@ Now to take advantage of this new class, we needed to generate the data and corr
 - A data file.
 - A file containing the correct answers.
 
-The generation process is quite similar to the one used in the provided DataExecuterDemo class. The main difference is that for the calculation of the correct answers, OpenMP is used to speed up the process. Using this method, a dataset of 5 million rows for each column and 2 million queries can be generated in 2 minutes on a 12-thread machine.
+The generation process is quite similar to the one used in the provided DataExecuterDemo class. The main difference is that for the calculation of the correct answers, OpenMP library is used to speed up the process. Using this method, a dataset of 5 million rows for each column and 2 million queries can be generated in 2 minutes on a 12-thread machine.
 
 ### Compiling the Estimator
 
@@ -87,16 +87,16 @@ The estimator is composed of several components:
     Histograms are used to divide data values into different intervals (buckets) and record the frequency of data in each bucket ([HistogramBucketed.hpp](CardinalityEstimation/include/HistogramBucketed.hpp)). Two key classes for the histogram implementation are the following.
 
 - __Buckets__:  
-    Of course, having a histogram structure that contains all the possible values is not feasible in practice. To address this issue, we use a class named [`Bucket`](CardinalityEstimation/include/Bucket.hpp) that contains a range of values and their frequencies. The HistogramBucketed class employs Bucket objects to track value frequencies across specified ranges. To enhance estimation accuracy, each Bucket is further divided into sub-buckets. This hierarchical structure allows for more precise frequency tracking when it is required.
+    Of course, having a histogram structure that contains all the possible values is not feasible in practice. To address this issue, we use a class named [`Bucket`](CardinalityEstimation/include/Bucket.hpp) that groups a range of values and their frequencies. The HistogramBucketed class employs Bucket objects to track value frequencies across specified ranges. To enhance estimation accuracy, each Bucket is further divided into sub-buckets. This hierarchical structure allows for more precise frequency tracking when it is required.
 
 - __BinaryCache__:  
-    The [`BinaryCache`](CardinalityEstimation/include/BinaryCache.hpp) class is used in the estimation when we have greater (>) as an operation in the query. Instead of iterating through all the buckets and adding their frequencies, we use a binary structure where in each lower level we have smaller intervals that contain the right ammount of elements to add to the final result. This way we can achieve a logarithmic complexity in the estimation process while keeping the memory usage low.
+    The [`BinaryCache`](CardinalityEstimation/include/BinaryCache.hpp) class is used in the estimation when we have greater (>) as an operation in the query. Instead of iterating through all the buckets and summing their frequencies, we employ a binary structure, where each lower level represents smaller intervals, precomputed to contain the correct number of elements for efficient aggregation. This approach reduces the estimation complexity to logarithmic time while maintaining minimal memory usage.
 
 - __HyperLogLog (HLL)__:  
     The [`HLL`](CardinalityEstimation/include/HLL.hpp) class provides a fast estimation of distinct values based on the [HyperLogLog algorithm](https://en.wikipedia.org/wiki/HyperLogLog). The implementation of this class is based on the [HyperLogLog paper](https://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf)
 
 - __MCV (Most Common Value) Tracking__:  
-    The [`MCVTrack`](CardinalityEstimation/include/MCVTrack.hpp) class keeps counts for values that occur frequently. This helps further improve the accuracy of the estimator.
+    The [`MCVTrack`](CardinalityEstimation/include/MCVTrack.hpp) class keeps counts for values that occur frequently. By exploiting the tendency of common values to appear early and frequently, it significantly improves the estimator's accuracy.
 
 - __Third-Party Tools__:  
     Besides the standard library, the project uses:
